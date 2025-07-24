@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatRider Meme Coin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Eater&display=swap');
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c);
+            color: #e0e0e0;
+            font-family: 'Eater', cursive;
+        }
+        .hero-bg {
+            background: url('https://i.imgur.com/4fWwe7g.jpeg') no-repeat center center/cover;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .misty-bg {
+            background: url('https://images.unsplash.com/photo-1508435430507-9b8e48b62676?auto=format&fit=crop&q=80') no-repeat center center/cover;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            background: #111;
+            padding: 10px 0;
+        }
+        .marquee span {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .video-container {
+            position: relative;
+            border: 4px solid transparent;
+            border-image: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0)) 1;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: fog 5s ease-in-out infinite;
+        }
+        @keyframes fog {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.5); }
+        }
+        .tokenomics-box, .how-to-buy-box, .community-button, .footer-content {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease-in-out;
+        }
+        .tokenomics-box.visible, .how-to-buy-box.visible, .community-button.visible, .footer-content.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .community-button img {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+        }
+        .burger-menu {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 50;
+            cursor: pointer;
+        }
+        .burger-icon {
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .burger-icon span {
+            background: #e0e0e0;
+            height: 4px;
+            width: 100%;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .burger-menu.open .burger-icon span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .burger-menu.open .burger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger-menu.open .burger-icon span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 250px;
+            height: 100%;
+            background: rgba(17, 17, 17, 0.95);
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+            z-index: 40;
+        }
+        .nav-menu.open {
+            left: 0;
+        }
+        .nav-menu ul {
+            list-style: none;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        .nav-menu li {
+            margin: 1.5rem 0;
+        }
+        .nav-menu a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+        .nav-menu a:hover {
+            color: #ff5555;
+        }
+        .hero-logo img {
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body class="relative">
+    <!-- Burger Menu -->
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="#" onclick="scrollToSection('about')">About</a></li>
+            <li><a href="#" onclick="scrollToSection('how-to-buy')">How to Buy</a></li>
+            <li><a href="#" onclick="scrollToSection('tokenomics')">Tokenomics</a></li>
+            <li><a href="#" onclick="scrollToSection('community')">Social</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center">
+        <div class="hero-bg"></div>
+        <h1 class="text-6xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-8" style="font-family: 'Eater', cursive;">Cat Rider</h1>
+        <img src="https://i.imgur.com/6P47qTI.png" alt="CatRider Hero" class="w-1/2 max-w-md mx-auto mb-6">
+        <p class="text-lg text-gray-300 mb-4">The legendary cat Rider</p>
+        <button onclick="copyToClipboard('soon')" class="bg-gray-800 text-white px-6 py-2 rounded-lg border-2 border-gray-500 hover:bg-gray-700 transition duration-300">Ca: soon</button>
+        <div class="hero-logo mt-4">
+            <img src="https://i.imgur.com/GcjvB5E.jpeg" alt="CatRider Logo">
+        </div>
+        <a href="#" class="absolute top-4 right-4 bg-red-700 text-white px-6 py-3 rounded-lg hover:bg-red-800 transition duration-300">Buy $Rider</a>
+    </section>
+
+    <!-- Marquee Divider -->
+    <div class="marquee">
+        <span class="text-2xl text-gray-300" style="font-family: 'Eater', cursive;">Cat Rider 🐱    Cat Rider 🐱    Cat Rider 🐱    Cat Rider 🐱   </span>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-6" style="font-family: 'Eater', cursive;">About Cat Rider</h2>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">cat rider is the viral cat on the internet riding wild animals. producing millions of views across all social media.</p>
+        <div class="video-container mx-auto max-w-3xl">
+            <video class="w-full" muted loop playsinline>
+                <source src="https://i.imgur.com/uWkUZM4.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-12" style="font-family: 'Eater', cursive;">Tokenomics:</h2>
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
+            <div class="tokenomics-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
+                <span class="text-4xl mb-4 block">💎</span>
+                <h3 class="text-2xl mb-2">Total Supply</h3>
+                <p class="text-lg">1 billion</p>
+            </div>
+            <div class="tokenomics-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
+                <span class="text-4xl mb-4 block">💰</span>
+                <h3 class="text-2xl mb-2">Tax</h3>
+                <p class="text-lg">0%</p>
+            </div>
+            <div class="tokenomics-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
+                <span class="text-4xl mb-4 block">🔥</span>
+                <h3 class="text-2xl mb-2">Liquidity Burn</h3>
+                <p class="text-lg">1%</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Autonomous Video Section -->
+    <section class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <div class="video-container mx-auto max-w-3xl">
+            <video class="w-full" muted controls loop playsinline>
+                <source src="https://i.imgur.com/E8KWvPx.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- How to Buy Section -->
+    <section id="how-to-buy" class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-12" style="font-family: 'Eater', cursive;">How to Buy</h2>
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
+            <div class="how-to-buy-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
+                <h3 class="text-2xl mb-2">Step 1: Get a Wallet</h3>
+                <p class="text-lg">Download Phantom Wallet from phantom.app to get started.</p>
+            </div>
+            <div class="how-to-buy-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
+                <h3 class="text-2xl mb-2">Step 2: Buy $SOL</h3>
+                <p class="text-lg">Get your hands on some $SOL from your favorite exchange.</p>
+            </div>
+            <div class="how-to-buy-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
+                <h3 class="text-2xl mb-2">Step 3: Swap</h3>
+                <p class="text-lg">Use Raydium or Jupiter to trade your $SOL for $Rider. Start the meme revolution!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Autoplay Video Section -->
+    <section class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <div class="video-container mx-auto max-w-3xl">
+            <video class="w-full" muted controls loop playsinline>
+                <source src="https://i.imgur.com/vGmS0qK.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Join Our Community Section -->
+    <section id="community" class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-12" style="font-family: 'Eater', cursive;">Join Our Community</h2>
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
+            <a href="#" class="community-button bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500 flex flex-col items-center justify-center">
+                <img src="https://i.imgur.com/SMYFsyV.png" alt="X Logo" class="mb-4">
+                <span class="text-lg">X</span>
+            </a>
+            <a href="#" class="community-button bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500 flex flex-col items-center justify-center">
+                <img src="https://i.imgur.com/HcTEVem.png" alt="Telegram Logo" class="mb-4">
+                <span class="text-lg">Telegram</span>
+            </a>
+            <a href="#" class="community-button bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500 flex flex-col items-center justify-center">
+                <img src="https://i.imgur.com/9evh4MR.png" alt="Dexscreener Logo" class="mb-4">
+                <span class="text-lg">Dexscreener</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- New Video Section -->
+    <section class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <div class="video-container mx-auto max-w-3xl">
+            <video class="w-full" muted loop playsinline>
+                <source src="https://i.imgur.com/tDMbOIf.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="relative py-20 text-center">
+        <div class="misty-bg"></div>
+        <div class="footer-content bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500 max-w-3xl mx-auto">
+            <p class="text-lg">© 2025 CatRider. All rights reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied: ' + text);
+            });
+        }
+
+        function toggleMenu() {
+            document.querySelector('.nav-menu').classList.toggle('open');
+            document.querySelector('.burger-menu').classList.toggle('open');
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            toggleMenu(); // Close menu after clicking a link
+        }
+
+        const videos = document.querySelectorAll('video');
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play().catch(error => {
+                        console.log('Autoplay failed:', error);
+                    });
+                } else {
+                    entry.target.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+        videos.forEach(video => videoObserver.observe(video));
+
+        const animatedBoxes = document.querySelectorAll('.tokenomics-box, .how-to-buy-box, .community-button, .footer-content');
+        const boxObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+        animatedBoxes.forEach(box => boxObserver.observe(box));
+    </script>
+</body>
+</html>

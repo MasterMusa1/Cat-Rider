@@ -137,6 +137,35 @@
             width: 80px;
             height: 80px;
         }
+        .emoji-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(var(--x1), var(--y1)) rotate(10deg); }
+            50% { transform: translate(var(--x2), var(--y2)) rotate(0deg); }
+            75% { transform: translate(var(--x3), var(--y3)) rotate(-10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .hero-image {
+            animation: zoomIn 6s ease-in-out forwards;
+        }
+        @keyframes zoomIn {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
     </style>
 </head>
 <body class="relative">
@@ -161,7 +190,7 @@
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center">
         <div class="hero-bg"></div>
         <h1 class="text-6xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-8" style="font-family: 'Eater', cursive;">Cat Rider</h1>
-        <img src="https://i.imgur.com/6P47qTI.png" alt="CatRider Hero" class="w-1/2 max-w-md mx-auto mb-6">
+        <img src="https://i.imgur.com/6P47qTI.png" alt="CatRider Hero" class="w-1/2 max-w-md mx-auto mb-6 hero-image">
         <p class="text-lg text-gray-300 mb-4">The legendary cat Rider</p>
         <button onclick="copyToClipboard('soon')" class="bg-gray-800 text-white px-6 py-2 rounded-lg border-2 border-gray-500 hover:bg-gray-700 transition duration-300">Ca: soon</button>
         <div class="hero-logo mt-4">
@@ -178,6 +207,7 @@
     <!-- About Section -->
     <section id="about" class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-6" style="font-family: 'Eater', cursive;">About Cat Rider</h2>
         <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">cat rider is the viral cat on the internet riding wild animals. producing millions of views across all social media.</p>
         <div class="video-container mx-auto max-w-3xl">
@@ -190,6 +220,7 @@
     <!-- Tokenomics Section -->
     <section id="tokenomics" class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-12" style="font-family: 'Eater', cursive;">Tokenomics:</h2>
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
             <div class="tokenomics-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
@@ -213,6 +244,7 @@
     <!-- Autonomous Video Section -->
     <section class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <div class="video-container mx-auto max-w-3xl">
             <video class="w-full" muted controls loop playsinline>
                 <source src="https://i.imgur.com/E8KWvPx.mp4" type="video/mp4">
@@ -223,6 +255,7 @@
     <!-- How to Buy Section -->
     <section id="how-to-buy" class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-12" style="font-family: 'Eater', cursive;">How to Buy</h2>
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
             <div class="how-to-buy-box bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500">
@@ -243,6 +276,7 @@
     <!-- Autoplay Video Section -->
     <section class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <div class="video-container mx-auto max-w-3xl">
             <video class="w-full" muted controls loop playsinline>
                 <source src="https://i.imgur.com/vGmS0qK.mp4" type="video/mp4">
@@ -253,6 +287,7 @@
     <!-- Join Our Community Section -->
     <section id="community" class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-12" style="font-family: 'Eater', cursive;">Join Our Community</h2>
         <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl">
             <a href="#" class="community-button bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500 flex flex-col items-center justify-center">
@@ -283,6 +318,7 @@
     <!-- Footer Section -->
     <section class="relative py-20 text-center">
         <div class="misty-bg"></div>
+        <div class="emoji-container"></div>
         <div class="footer-content bg-gray-800 text-white p-6 rounded-lg shadow-lg border-2 border-gray-500 max-w-3xl mx-auto">
             <p class="text-lg">© 2025 CatRider. All rights reserved.</p>
         </div>
@@ -328,6 +364,49 @@
             });
         }, { threshold: 0.3 });
         animatedBoxes.forEach(box => boxObserver.observe(box));
+
+        // Floating emojis
+        const emojiContainers = document.querySelectorAll('.emoji-container');
+        const emojis = ['🐱', '🐈'];
+
+        emojiContainers.forEach(container => {
+            const numEmojis = Math.floor(Math.random() * 3) + 3; // 3 to 5 emojis
+            for (let i = 0; i < numEmojis; i++) {
+                const emoji = document.createElement('div');
+                emoji.classList.add('floating-emoji');
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Random initial position
+                const maxX = 80; // Stay within 80% of section width
+                const maxY = 80; // Stay within 80% of section height
+                const startX = Math.random() * maxX;
+                const startY = Math.random() * maxY;
+                
+                // Random movement distances
+                const x1 = (Math.random() - 0.5) * 100; // -50 to 50px
+                const y1 = (Math.random() - 0.5) * 100;
+                const x2 = (Math.random() - 0.5) * 100;
+                const y2 = (Math.random() - 0.5) * 100;
+                const x3 = (Math.random() - 0.5) * 100;
+                const y3 = (Math.random() - 0.5) * 100;
+                
+                // Random animation duration and delay
+                const duration = 5 + Math.random() * 5; // 5 to 10s
+                const delay = Math.random() * 2; // 0 to 2s
+                
+                emoji.style.left = `${startX}%`;
+                emoji.style.top = `${startY}%`;
+                emoji.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                emoji.style.setProperty('--x1', `${x1}px`);
+                emoji.style.setProperty('--y1', `${y1}px`);
+                emoji.style.setProperty('--x2', `${x2}px`);
+                emoji.style.setProperty('--y2', `${y2}px`);
+                emoji.style.setProperty('--x3', `${x3}px`);
+                emoji.style.setProperty('--y3', `${y3}px`);
+                
+                container.appendChild(emoji);
+            }
+        });
     </script>
 </body>
 </html>

@@ -160,11 +160,12 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
         .hero-image {
-            animation: zoomIn 6s ease-in-out forwards;
+            animation: zoomIn 10s ease-in-out infinite;
         }
         @keyframes zoomIn {
             0% { transform: scale(1); }
-            100% { transform: scale(1.2); }
+            60% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -190,7 +191,7 @@
     <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center">
         <div class="hero-bg"></div>
         <h1 class="text-6xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-8" style="font-family: 'Eater', cursive;">Cat Rider</h1>
-        <img src="https://i.imgur.com/6P47qTI.png" alt="CatRider Hero" class="w-1/2 max-w-md mx-auto mb-6 hero-image">
+        <img src="https://i.imgur.com/Oi3HXNK.png" alt="CatRider Hero" class="w-1/2 max-w-md mx-auto mb-6 hero-image">
         <p class="text-lg text-gray-300 mb-4">The legendary cat Rider</p>
         <button onclick="copyToClipboard('soon')" class="bg-gray-800 text-white px-6 py-2 rounded-lg border-2 border-gray-500 hover:bg-gray-700 transition duration-300">Ca: soon</button>
         <div class="hero-logo mt-4">
@@ -209,7 +210,7 @@
         <div class="misty-bg"></div>
         <div class="emoji-container"></div>
         <h2 class="text-4xl text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] mb-6" style="font-family: 'Eater', cursive;">About Cat Rider</h2>
-        <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">cat rider is the viral cat on the internet riding wild animals. producing millions of views across all social media.</p>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8">Cat Rider is the viral sensation, known for riding wild animals and captivating millions of fans across social media. Now, the adventure takes a new turn as Cat Rider leaps onto the Solana blockchain as a memecoin. Join the phenomenon and ride the wave of the future with the internet's most daring feline. The adventure starts here!.</p>
         <div class="video-container mx-auto max-w-3xl">
             <video class="w-full" muted loop playsinline>
                 <source src="https://i.imgur.com/uWkUZM4.mp4" type="video/mp4">
